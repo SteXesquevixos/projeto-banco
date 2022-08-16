@@ -8,8 +8,7 @@ public class Pessoa {
     private String nome;
     private Date dataNascimento;
 
-    public Pessoa() {
-    }
+    public Pessoa() {}
 
     public Pessoa(int id, String nome, Date dataNascimento) {
         this.id = id;

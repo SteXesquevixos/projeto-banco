@@ -1,3 +1,5 @@
+package br.com.contabancaria.simple;
+
 import java.sql.*;
 
 public class ConnectionDbUsuarios_03 {

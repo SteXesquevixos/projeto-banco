@@ -19,7 +19,7 @@ public class PessoaDAOImpl implements PessoaDAO {
         List<Pessoa> pessoas = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-             Statement stmt = conn.createStatement()
+             Statement stmt = conn.createStatement();
         ) {
 
             String sql_DB = "select * from pessoa";
@@ -53,7 +53,8 @@ public class PessoaDAOImpl implements PessoaDAO {
                 int identificador = rs.getInt("id");
                 String nome = rs.getString("nome");
                 Date dataNascimento = rs.getDate("data_nascimento");
-                return new Pessoa(identificador, nome, dataNascimento);
+                Pessoa pessoa = new Pessoa(identificador, nome, dataNascimento);
+                return pessoa;
             }
 
         } catch (SQLException e) {

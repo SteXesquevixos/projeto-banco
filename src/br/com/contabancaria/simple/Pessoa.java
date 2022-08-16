@@ -1,7 +1,7 @@
-import java.sql.SQLOutput;
+package br.com.contabancaria.simple;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Pessoa {
     private int id;

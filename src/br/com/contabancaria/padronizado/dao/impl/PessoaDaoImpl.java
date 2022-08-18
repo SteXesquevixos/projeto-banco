@@ -9,9 +9,9 @@ import java.util.List;
 
 public class PessoaDaoImpl implements PessoaDao {
 
-    static final String DB_URL = "jdbc:mysql://localhost/banco";
+    static final String DB_URL = "jdbc:mysql://localhost/escola";
     static final String USER = "root";
-    static final String PASS = "88510-12PyJsxPMV**";
+    static final String PASS = "teste123";
 
     @Override
     public List<Pessoa> buscarPessoas() {
@@ -134,9 +134,22 @@ public class PessoaDaoImpl implements PessoaDao {
         return null;
     }
 
-//    public Pessoa atualizacaoPessoaPorNome() {
-//
-//    }
+    @Override
+    public Pessoa atualizarPessoa(Pessoa pessoa) {
+        String inserirNovaPessoa = "UPDATE pessoa SET nome = ? , data_nascimento = ? WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement st = conn.prepareStatement(inserirNovaPessoa);
+        ) {
+            st.setString(1, pessoa.getNome());
+            st.setDate(2, (Date) pessoa.getDataNascimento());
+            st.setLong(3, pessoa.getId());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
 
 

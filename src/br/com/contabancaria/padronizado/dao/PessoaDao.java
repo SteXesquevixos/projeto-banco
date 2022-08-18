@@ -8,12 +8,12 @@ import java.util.List;
 public interface PessoaDao {
 
     List<Pessoa> buscarPessoas();
-
     Pessoa buscarPessoaPorId(Long id);
     Pessoa buscarPessoaPorNome(String nome);
     Pessoa buscarPessoaPorDataNascimento(Date data);
     Pessoa inserirPessoa(String nome, Date data);
     Pessoa deletarPessoa(Long id);
+    Pessoa atualizarPessoa(Pessoa pessoa);
 
 }
 

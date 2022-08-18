@@ -109,13 +109,16 @@ public class PessoaDaoImpl implements PessoaDao {
     }
 
     public Pessoa inserirPessoa(String nome, Date data) {
-        String inserirNovaPessoa = "INSERT INTO pessoa (nome, data_nascimento) VALUES (?, ?)";
+        String inserirNovaPessoa = "INSERT INTO pessoa (id, nome, data_nascimento) VALUES (?, ? , ? )";
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              PreparedStatement st = conn.prepareStatement(inserirNovaPessoa);
         ) {
-            st.setString(1, nome);
-            st.setDate(2, data);
+            int id = getNextId();
+            st.setInt(1, id);
+            st.setString(2, nome);
+            st.setDate(3, data);
             st.executeUpdate();
+            return new Pessoa(id, nome, data);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,6 +147,23 @@ public class PessoaDaoImpl implements PessoaDao {
             st.setDate(2, (Date) pessoa.getDataNascimento());
             st.setLong(3, pessoa.getId());
             st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Integer getNextId() {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            String sql_DB = "select max(id) as id from pessoa";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql_DB);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id") + 1;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

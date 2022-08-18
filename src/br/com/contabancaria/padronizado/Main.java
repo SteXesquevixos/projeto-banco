@@ -1,40 +1,40 @@
 package br.com.contabancaria.padronizado;
 
-import br.com.contabancaria.padronizado.dao.PessoaDao;
-import br.com.contabancaria.padronizado.dao.impl.PessoaDaoImpl;
 import br.com.contabancaria.padronizado.dao.model.Pessoa;
+import br.com.contabancaria.padronizado.service.PessoaService;
+import br.com.contabancaria.padronizado.service.impl.PessoaServiceImpl;
 
 import java.sql.Date;
 import java.util.List;
 
 public class Main {
 
+    PessoaService pessoaService = new PessoaServiceImpl();
+
     public static void main(String[] args) {
 
         Main principal = new Main();
 
-        PessoaDao pessoaDao = new PessoaDaoImpl();
+        principal.listagemPessoas();
 
-        principal.listagemPessoas(pessoaDao);
+        principal.filtrarPessoaPorId();
 
-        principal.filtrarPessoaPorId(pessoaDao);
+        principal.filtrarPessoaPorNome();
 
-        principal.filtrarPessoaPorNome(pessoaDao);
+        principal.filtrarPessoaDataNascimento();
 
-        principal.filtrarPessoaDataNascimento(pessoaDao);
+        principal.adicionarPessoa();
 
-        principal.adicionarPessoa(pessoaDao);
+        principal.removerPessoa();
 
-        principal.removerPessoa(pessoaDao);
-
-        principal.atualizarPessoa(pessoaDao);
+        principal.atualizarPessoa();
 
     }
 
 
-    public void filtrarPessoaPorId(PessoaDao pessoaDao) {
+    public void filtrarPessoaPorId() {
         Long id = 3L;
-        Pessoa pessoa = pessoaDao.buscarPessoaPorId(id);
+        Pessoa pessoa = pessoaService.buscarPessoaPorId(id);
 
         System.out.println(" -------- UNICA PESSOA ----- ");
         if(pessoa != null) {
@@ -42,9 +42,9 @@ public class Main {
         }
     }
 
-    public void filtrarPessoaPorNome(PessoaDao pessoaDao) {
+    public void filtrarPessoaPorNome() {
         String nome = "Alexander";
-        Pessoa pessoa = pessoaDao.buscarPessoaPorNome(nome);
+        Pessoa pessoa = pessoaService.buscarPessoaPorNome(nome);
 
         System.out.println(" -------- UNICA PESSOA ----- ");
         if(pessoa != null) {
@@ -52,9 +52,9 @@ public class Main {
         }
     }
 
-    public void filtrarPessoaDataNascimento(PessoaDao pessoaDao){
+    public void filtrarPessoaDataNascimento(){
         Date dataNascimento = Date.valueOf("2009-04-01");
-        Pessoa pessoa = pessoaDao.buscarPessoaPorDataNascimento(dataNascimento);
+        Pessoa pessoa = pessoaService.buscarPessoaPorDataNascimento(dataNascimento);
 
         System.out.println(" -------- UNICA PESSOA ----- ");
         if(pessoa != null) {
@@ -62,28 +62,25 @@ public class Main {
         }
     }
 
-    public void atualizarPessoa(PessoaDao pessoaDao) {
+    public void atualizarPessoa() {
         Pessoa pessoa = new Pessoa(3, "Claudicleysson", Date.valueOf("1909-01-08"));
-        pessoa = pessoaDao.atualizarPessoa(pessoa);
+        pessoa = pessoaService.atualizarPessoa(pessoa);
     }
 
-    public void adicionarPessoa(PessoaDao pessoaDao) {
+    public void adicionarPessoa() {
         String nome = "Anderson";
         Date dataNascimento = Date.valueOf("1980-07-15");
-        Pessoa pessoa = pessoaDao.inserirPessoa(nome, dataNascimento);
+        Pessoa pessoa = pessoaService.inserirPessoa(nome, dataNascimento);
+        System.out.println(pessoa.toString());
     }
 
-    public void removerPessoa(PessoaDao pessoaDao) {
+    public void removerPessoa() {
         Long id = 2L;
-        Pessoa pessoa = pessoaDao.deletarPessoa(id);
+        Pessoa pessoa = pessoaService.deletarPessoa(id);
     }
 
-//    public void updatePessoaPorNome(Pessoa pessoaDao) {
-//
-//    }
-
-    public void listagemPessoas(PessoaDao pessoaDAO) {
-        List<Pessoa> Pessoas = pessoaDAO.buscarPessoas();
+    public void listagemPessoas() {
+        List<Pessoa> Pessoas = pessoaService.buscarPessoas();
         imprimir(Pessoas);
     }
 

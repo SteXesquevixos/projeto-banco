@@ -23,6 +23,11 @@ public class Main {
 
         principal.filtrarPessoaDataNascimento(pessoaDao);
 
+        principal.adicionarPessoa(pessoaDao);
+
+        principal.removerPessoa(pessoaDao);
+
+
     }
 
 
@@ -32,9 +37,44 @@ public class Main {
 
         System.out.println(" -------- UNICA PESSOA ----- ");
         if(pessoa != null) {
-            System.out.println( pessoa.getId() + " -  " + pessoa.getNome()  +  pessoa.getDataNascimento());
+            System.out.println( pessoa.getId() + "\t" + pessoa.getNome()  + "\t" +  pessoa.getDataNascimento());
         }
     }
+
+    public void filtrarPessoaPorNome(PessoaDao pessoaDao) {
+        String nome = "Alexander";
+        Pessoa pessoa = pessoaDao.buscarPessoaPorNome(nome);
+
+        System.out.println(" -------- UNICA PESSOA ----- ");
+        if(pessoa != null) {
+            System.out.println( pessoa.getId() + "\t" + pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
+        }
+    }
+
+    public void filtrarPessoaDataNascimento(PessoaDao pessoaDao){
+        Date dataNascimento = Date.valueOf("2009-04-01");
+        Pessoa pessoa = pessoaDao.buscarPessoaPorDataNascimento(dataNascimento);
+
+        System.out.println(" -------- UNICA PESSOA ----- ");
+        if(pessoa != null) {
+            System.out.println( pessoa.getId() + "\t" + pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
+        }
+    }
+
+    public void adicionarPessoa(PessoaDao pessoaDao) {
+        String nome = "Anderson";
+        Date dataNascimento = Date.valueOf("1980-07-15");
+        Pessoa pessoa = pessoaDao.inserirPessoa(nome, dataNascimento);
+    }
+
+    public void removerPessoa(PessoaDao pessoaDao) {
+        Long id = 2L;
+        Pessoa pessoa = pessoaDao.deletarPessoa(id);
+    }
+
+//    public void updatePessoaPorNome(Pessoa pessoaDao) {
+//
+//    }
 
     public void listagemPessoas(PessoaDao pessoaDAO) {
         List<Pessoa> Pessoas = pessoaDAO.buscarPessoas();
@@ -43,26 +83,9 @@ public class Main {
 
     public static void imprimir(List<Pessoa> pessoas) {
         for (Pessoa pessoa : pessoas) {
-            System.out.println( pessoa.getId() + " -  " +  pessoa.getNome()  +  pessoa.getDataNascimento());
+            System.out.println( pessoa.getId() + "\t" +  pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
         }
     }
-    public void filtrarPessoaPorNome(PessoaDao pessoaDao) {
-        String nome = "Alexander";
-        Pessoa pessoa = pessoaDao.buscarPessoaPorNome(nome);
 
-        System.out.println(" -------- UNICA PESSOA ----- ");
-        if(pessoa != null) {
-            System.out.println( pessoa.getId() + " -  " + pessoa.getNome()  +  pessoa.getDataNascimento());
-        }
-    }
-    public void filtrarPessoaDataNascimento(PessoaDao pessoaDao){
-        Date data_nascimento = Date.valueOf("2009-04-01");
-        Pessoa pessoa = pessoaDao.buscarPessoaPorDataNascimento(data_nascimento);
-
-        System.out.println(" -------- UNICA PESSOA ----- ");
-        if(pessoa != null) {
-            System.out.println( pessoa.getId() + " -  " + pessoa.getNome()  +  pessoa.getDataNascimento());
-        }
-    }
 }
 

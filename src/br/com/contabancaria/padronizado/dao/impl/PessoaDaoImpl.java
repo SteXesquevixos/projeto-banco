@@ -11,19 +11,19 @@ public class PessoaDaoImpl implements PessoaDao {
 
     static final String DB_URL = "jdbc:mysql://localhost/banco";
     static final String USER = "root";
-    static final String PASS = "Alex01@3#4%!mx";
-    @Override
+    static final String PASS = "88510-12PyJsxPMV**";
 
+    @Override
     public List<Pessoa> buscarPessoas() {
 
         List<Pessoa> pessoas = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                 Statement stmt = conn.createStatement();
-            ) {
+             Statement stmt = conn.createStatement();
+        ) {
 
             String sql_DB = "select * from pessoa";
-            ResultSet rs= stmt.executeQuery(sql_DB);
+            ResultSet rs = stmt.executeQuery(sql_DB);
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -35,7 +35,6 @@ public class PessoaDaoImpl implements PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return pessoas;
     }
 
@@ -60,9 +59,9 @@ public class PessoaDaoImpl implements PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
+
     public Pessoa buscarPessoaPorNome(String nome) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -83,9 +82,9 @@ public class PessoaDaoImpl implements PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
+
     public Pessoa buscarPessoaPorDataNascimento(Date data) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -106,8 +105,38 @@ public class PessoaDaoImpl implements PessoaDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
+
+    public Pessoa inserirPessoa(String nome, Date data) {
+        String inserirNovaPessoa = "INSERT INTO pessoa (nome, data_nascimento) VALUES (?, ?)";
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement st = conn.prepareStatement(inserirNovaPessoa);
+        ) {
+            st.setString(1, nome);
+            st.setDate(2, data);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Pessoa deletarPessoa(Long id) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement();
+        ) {
+            String deletarPessoa = "DELETE FROM pessoa WHERE id = " + id;
+            stmt.executeUpdate(deletarPessoa);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+//    public Pessoa atualizacaoPessoaPorNome() {
+//
+//    }
 }
+
 

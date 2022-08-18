@@ -27,6 +27,7 @@ public class Main {
 
         principal.removerPessoa(pessoaDao);
 
+        principal.atualizarPessoa(pessoaDao);
 
     }
 
@@ -59,6 +60,11 @@ public class Main {
         if(pessoa != null) {
             System.out.println( pessoa.getId() + "\t" + pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
         }
+    }
+
+    public void atualizarPessoa(PessoaDao pessoaDao) {
+        Pessoa pessoa = new Pessoa(3, "Claudicleysson", Date.valueOf("1909-01-08"));
+        pessoa = pessoaDao.atualizarPessoa(pessoa);
     }
 
     public void adicionarPessoa(PessoaDao pessoaDao) {

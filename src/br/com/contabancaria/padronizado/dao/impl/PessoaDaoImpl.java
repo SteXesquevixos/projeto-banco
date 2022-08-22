@@ -9,9 +9,9 @@ import java.util.List;
 
 public class PessoaDaoImpl implements PessoaDao {
 
-    static final String DB_URL = "jdbc:mysql://localhost/escola";
+    static final String DB_URL = "jdbc:mysql://localhost/banco";
     static final String USER = "root";
-    static final String PASS = "teste123";
+    static final String PASS = "88510-12PyJsxPMV**";
 
     @Override
     public List<Pessoa> buscarPessoas() {
@@ -26,7 +26,7 @@ public class PessoaDaoImpl implements PessoaDao {
             ResultSet rs = stmt.executeQuery(sql_DB);
 
             while (rs.next()) {
-                int id = rs.getInt("id");
+                Long id = rs.getLong("id");
                 String nome = rs.getString("nome");
                 Date dataNascimento = rs.getDate("data_nascimento");
                 Pessoa pessoa = new Pessoa(id, nome, dataNascimento);
@@ -49,7 +49,7 @@ public class PessoaDaoImpl implements PessoaDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                int identificador = rs.getInt("id");
+                Long identificador = rs.getLong("id");
                 String nome = rs.getString("nome");
                 Date dataNascimento = rs.getDate("data_nascimento");
                 Pessoa pessoa = new Pessoa(identificador, nome, dataNascimento);
@@ -72,7 +72,7 @@ public class PessoaDaoImpl implements PessoaDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                int identificador = rs.getInt("id");
+                long identificador = rs.getLong("id");
                 String nome_usuario = rs.getString("nome");
                 Date dataNascimento = rs.getDate("data_nascimento");
                 Pessoa pessoa = new Pessoa(identificador, nome_usuario, dataNascimento);
@@ -95,7 +95,7 @@ public class PessoaDaoImpl implements PessoaDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                int identificador = rs.getInt("id");
+                long identificador = rs.getLong("id");
                 String nome_usuario = rs.getString("nome");
                 Date dataNascimento = rs.getDate("data_nascimento");
                 Pessoa pessoa = new Pessoa(identificador, nome_usuario, dataNascimento);
@@ -113,8 +113,8 @@ public class PessoaDaoImpl implements PessoaDao {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              PreparedStatement st = conn.prepareStatement(inserirNovaPessoa);
         ) {
-            int id = getNextId();
-            st.setInt(1, id);
+            long id = getNextId();
+            st.setLong(1, id);
             st.setString(2, nome);
             st.setDate(3, data);
             st.executeUpdate();
@@ -144,7 +144,7 @@ public class PessoaDaoImpl implements PessoaDao {
              PreparedStatement st = conn.prepareStatement(inserirNovaPessoa);
         ) {
             st.setString(1, pessoa.getNome());
-            st.setDate(2, (Date) pessoa.getDataNascimento());
+            st.setDate(2, pessoa.getDataNascimento());
             st.setLong(3, pessoa.getId());
             st.executeUpdate();
         } catch (SQLException e) {

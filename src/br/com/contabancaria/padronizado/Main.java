@@ -23,32 +23,32 @@ public class Main {
 
         principal.filtrarPessoaDataNascimento();
 
+//        principal.atualizarPessoa();
+
         principal.adicionarPessoa();
 
-        principal.removerPessoa();
-
-        principal.atualizarPessoa();
+//        principal.removerPessoa();
 
     }
 
 
     public void filtrarPessoaPorId() {
-        Long id = 3L;
+        Long id = 4L;
         Pessoa pessoa = pessoaService.buscarPessoaPorId(id);
 
         System.out.println(" -------- UNICA PESSOA ----- ");
         if(pessoa != null) {
-            System.out.println( pessoa.getId() + "\t" + pessoa.getNome()  + "\t" +  pessoa.getDataNascimento());
+            System.out.println(pessoa.getId() + "\t" + pessoa.getNome()  + "\t" +  pessoa.getDataNascimento());
         }
     }
 
     public void filtrarPessoaPorNome() {
-        String nome = "Alexander";
+        String nome = "";
         Pessoa pessoa = pessoaService.buscarPessoaPorNome(nome);
 
         System.out.println(" -------- UNICA PESSOA ----- ");
         if(pessoa != null) {
-            System.out.println( pessoa.getId() + "\t" + pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
+            System.out.println(pessoa.getId() + "\t" + pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
         }
     }
 
@@ -58,20 +58,20 @@ public class Main {
 
         System.out.println(" -------- UNICA PESSOA ----- ");
         if(pessoa != null) {
-            System.out.println( pessoa.getId() + "\t" + pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
+            System.out.println(pessoa.getId() + "\t" + pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
         }
     }
 
     public void atualizarPessoa() {
-        Pessoa pessoa = new Pessoa(3, "Claudicleysson", Date.valueOf("1909-01-08"));
+        Pessoa pessoa = new Pessoa(2L, "Stephany", Date.valueOf("1998-01-20"));
         pessoa = pessoaService.atualizarPessoa(pessoa);
     }
 
     public void adicionarPessoa() {
-        String nome = "Anderson";
-        Date dataNascimento = Date.valueOf("1980-07-15");
+        String nome = "";
+        Date dataNascimento = Date.valueOf("");
         Pessoa pessoa = pessoaService.inserirPessoa(nome, dataNascimento);
-        System.out.println(pessoa.toString());
+//        System.out.println(pessoa.toString());
     }
 
     public void removerPessoa() {
@@ -86,7 +86,7 @@ public class Main {
 
     public static void imprimir(List<Pessoa> pessoas) {
         for (Pessoa pessoa : pessoas) {
-            System.out.println( pessoa.getId() + "\t" +  pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
+            System.out.println(pessoa.getId() + "\t" +  pessoa.getNome() + "\t" +  pessoa.getDataNascimento());
         }
     }
 

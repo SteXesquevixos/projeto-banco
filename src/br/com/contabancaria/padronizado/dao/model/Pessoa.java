@@ -1,26 +1,26 @@
 package br.com.contabancaria.padronizado.dao.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Pessoa {
-    private int id;
+    private Long id;
     private String nome;
     private Date dataNascimento;
 
         public Pessoa() {
         }
 
-        public Pessoa(int id, String nome, Date dataNascimento) {
+        public Pessoa(Long id, String nome, Date dataNascimento) {
             this.id = id;
             this.nome = nome;
             this.dataNascimento = dataNascimento;
         }
 
-        public int getId() {
+        public Long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(Long id) {
             this.id = id;
         }
 

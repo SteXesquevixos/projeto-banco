@@ -2,7 +2,7 @@ package br.com.contabancaria.padronizado.service;
 
 import br.com.contabancaria.padronizado.dao.model.Pessoa;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public interface PessoaService {
